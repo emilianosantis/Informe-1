@@ -1,0 +1,71 @@
+---
+title: "Informe práctico 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+sube <- readr::read_delim("https://raw.githubusercontent.com/paocorrales/Visualizacion/main/datos/operaciones-de-viaje-limpio.csv",
+                          delim = ";") 
+```
+
+La base de datos Operaciones de viaje por Periodo - Modo - Jurisdicción - Grupo Tarifario - Empresa - Línea - Tipo de Pasaje - Cantidad contiene información sobre viajes en trenes, subte, pre metro y colectivos entre 2013 y 2019. Esta base de datos se encuentra disponible en el portal [Datos Argentina](https://datos.gob.ar/it/dataset/transporte-sube-operaciones-viaje-por-mes-region-metropolitana-buenos-aires/archivo/transporte_faaf3cfa-9ce5-4f7a-8391-389ad9c2a83d).
+
+### **Parte 1**
+
+**Pregunta:** ¿Cómo evolucionó el uso del colectivo respecto de otros medios de transporte a lo largo de los años? ¿Es igual para cualquier tipo de pasaje?
+
+
+**Introducción:** *Tu introducción va aqui*
+
+**Enfoque:** *Tu forma de resolución va aquí*
+
+**Analisis:**
+
+
+```{r}
+# Tu código de R va aquí
+library("ggplot2")
+
+ggplot(sube, aes(x = periodo , y = suma_de_cantidad,color= modo)) +
+  geom_point(alpha = 0.25) + scale_color_manual(values = c("red", "orange", "blue")) + facet_wrap(~modo)# + scale_y_continuous(breaks = seq(2500000,12500000, by = 2500000))
+
+# Dividimos el grafico en facetas para una mejor apreciación de los respectivos subconjuntos que fomar los modo de viaje
+
+ggplot(sube, aes(x = periodo, color = modo, fill = modo )) + geom_density(alpha = 0.30) + facet_wrap(~modo) #+ scale_y_continuous(breaks = seq(2500000,12500000, by = 2500000))
+
+ ggplot(sube) +
+  geom_smooth(mapping = aes(periodo, suma_de_cantidad ,color= modo)) #+ scale_color_manual(values = c("red", "orange", "blue")) + facet_wrap(~modo)# + scale_y_continuous(breaks = seq(2500000,12500000, by = 2500000))
+
+```
+
+```{r}
+# Tu código de R va aquí
+ggplot(sube, aes(x=periodo ,y= tipo_pasaje,)) + geom_line()
+
+
+```
+
+
+**Discusión:** *Tu discusión de los resultados va aquí.*
+
+### **Parte 2**
+
+**Pregunta:** *Tu pregunta va a aquí*
+
+**Introducción:** *Tu introducción va aqui*
+
+**Enfoque:** *Tu forma de resolución va aquí*
+
+**Analisis:**
+
+```{r }
+# Tu código de R va aquí
+```
+
+```{r }
+# Tu código de R va aquí
+```
+
+**Discusión:** *Tu discusión de los resultados va aquí.*
